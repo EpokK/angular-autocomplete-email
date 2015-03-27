@@ -93,7 +93,6 @@ gulp.task('scripts', function() {
     .pipe(connect.reload());
 });
 
-
 gulp.task('styles', function() {
 
   return gulp.src('src/directive.less')

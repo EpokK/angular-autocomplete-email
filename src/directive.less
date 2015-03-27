@@ -50,3 +50,41 @@
     margin-bottom: 0;
     display: inline;
 }
+
+.autocomplete-email {
+    z-index: 1;
+    border: 1px solid #CCC;
+    position: absolute;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    margin-left: -7px;
+    margin-right: -6px;
+}
+
+.autocomplete-email ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.autocomplete-email a {
+    line-height: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+
+.autocomplete-email a.selected,
+.autocomplete-email a:hover.selected {
+    background-color: #D9EDF7;
+}
+
+.autocomplete-email a:hover {
+    background-color: #EEE;
+}
