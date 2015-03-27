@@ -28,7 +28,7 @@
 
     </div>
 
-    <ul class="autocomplete-email">
+    <ul class="autocomplete-email" ng-show="open">
         <li ng-repeat="email in autocomplete">
             <a href="" ng-click="onAddEmail(email)">{{email.value}}</a>
         </li>

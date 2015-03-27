@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-27T13:50:09.212Z
+ * Version: 0.0.8 - 2015-03-27T20:57:56.734Z
  * License: MIT
  */
 
@@ -131,20 +131,24 @@ angular.module('angular-autocomplete-email', [])
             };
 
             scope.createNewInput = function() {
-                scope.emails.push({
-                    value: '',
-                    label: '',
-                    newValue: '',
-                    edit: true
-                });
+                var input = scope.getLastInput();
+
+                if(!angular.isDefined(input)) {
+                    scope.emails.push({
+                        value: '',
+                        label: '',
+                        newValue: '',
+                        edit: true
+                    });
+                }
+                
+                scope.focusLastInput();
             };
 
             scope.onClick = function(event) {
-                if(event.target == element[0].firstElementChild && scope.emails[scope.emails.length - 1].value) {
+                if(event.target == element[0].firstElementChild) {
                     scope.createNewInput();
                 }
-
-                scope.focusLastInput();
             };
 
             scope.onAddEmail = function(email) {
@@ -159,9 +163,20 @@ angular.module('angular-autocomplete-email', [])
 
             };
 
+            scope.getLastInput = function() {
+                var inputs = element.find('input');
+                var length = inputs.length;
+
+                return inputs[length - 1];
+            };
+
             scope.focusLastInput = function() {
                 $timeout(function() {
-                    angular.element(element).find('input')[0].focus();
+                    var input = scope.getLastInput();
+
+                    if(input) {
+                        scope.getLastInput().focus();
+                    }
                 }, 200);
             };
 
@@ -200,4 +215,4 @@ angular.module('angular-autocomplete-email', [])
     };
 });
 
-angular.module("angular-autocomplete-email").run(["$templateCache", function($templateCache) {$templateCache.put("input.html","<div><div class=\"input-email\" ng-mousedown=\"onMouseDown($event)\"><span ng-repeat=\"email in emails\"><span class=\"label-email\" ng-attr-title=\"{{email.value}}\" ng-dblclick=\"onEdit(email)\" ng-if=\"!!!email.edit\"><span>{{email.label}}</span> <a ng-click=\"onRemove($index)\">x</a></span><form class=\"form-email\" ng-submit=\"onSubmit(email)\" ng-if=\"!!email.edit\"><input class=\"edit-email\" type=\"text\" ng-model=\"email.newValue\" ng-blur=\"onBlur(email)\" ng-keydown=\"onKeyDown($event, email)\" ng-keyup=\"onKeyUp($event, email)\"></form></span></div><ul class=\"autocomplete-email\"><li ng-repeat=\"email in autocomplete\"><a href=\"\" ng-click=\"onAddEmail(email)\">{{email.value}}</a></li></ul></div>");}]);
+angular.module("angular-autocomplete-email").run(["$templateCache", function($templateCache) {$templateCache.put("input.html","<div><div class=\"input-email\" ng-mousedown=\"onMouseDown($event)\"><span ng-repeat=\"email in emails\"><span class=\"label-email\" ng-attr-title=\"{{email.value}}\" ng-dblclick=\"onEdit(email)\" ng-if=\"!!!email.edit\"><span>{{email.label}}</span> <a ng-click=\"onRemove($index)\">x</a></span><form class=\"form-email\" ng-submit=\"onSubmit(email)\" ng-if=\"!!email.edit\"><input class=\"edit-email\" type=\"text\" ng-model=\"email.newValue\" ng-blur=\"onBlur(email)\" ng-keydown=\"onKeyDown($event, email)\" ng-keyup=\"onKeyUp($event, email)\"></form></span></div><ul class=\"autocomplete-email\" ng-show=\"open\"><li ng-repeat=\"email in autocomplete\"><a href=\"\" ng-click=\"onAddEmail(email)\">{{email.value}}</a></li></ul></div>");}]);
