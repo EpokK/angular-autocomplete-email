@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="demo">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS directive demo</title>
+
+    <!-- TODO: Include Angular from Bower components -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-sanitize.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
+    <link rel="stylesheet" href="../dist/directive.css">
+    <link rel="stylesheet" href="demo.css">
+  </head>
+  <body>
+    <div class="container">
+
+
+      <div class="row" ng-controller="main">
+
+        <h4>Angular Autocomplete Email</h4>
+
+        <autocomplete-email emails="emails" autocomplete="autocomplete"></autocomplete-email>
+
+        <button type="button" name="button" ng-click="remove()">Remove</button>
+
+      </div>
+    </div>
+
+    <script src="../dist/directive.js"></script>
+    <script src="demo.js"></script>
+  </body>
+</html>

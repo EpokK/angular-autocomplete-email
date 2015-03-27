@@ -1,0 +1,22 @@
+<div>
+
+    <div class="input-email" ng-click="onClick()">
+
+        <span ng-repeat="email in emails">
+            <span class="label-email" ng-attr-title="{{email.value}}" ng-dblclick="onEdit(email)" ng-if="!!!email.edit">
+                <span>{{email.label}}</span>
+                <a ng-click="onRemove($index)">x</a>
+            </span>
+
+            <form ng-submit="onSubmit(email)" ng-if="!!email.edit">
+                <input type="text" ng-model="email.newValue" ng-blur="onBlur(email)" />
+            </form>
+        </span>
+
+    </div>
+
+    <ul>
+        <li></li>
+    </ul>
+
+</div>
