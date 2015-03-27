@@ -22,14 +22,15 @@
                     ng-model="email.newValue"
                     ng-blur="onBlur(email)"
                     ng-keydown="onKeyDown($event, email)"
-                    ng-keyup="onKeyUp($event, email)" />
+                    ng-keyup="onKeyUp($event, email)"
+                    ng-change="onChange(email)" />
             </form>
         </span>
 
     </div>
 
-    <ul class="autocomplete-email" ng-show="open">
-        <li ng-repeat="email in autocomplete">
+    <ul class="autocomplete-email">
+        <li ng-repeat="email in autocomplete | autocompleteFilter:newValue">
             <a href="" ng-click="onAddEmail(email)">{{email.value}}</a>
         </li>
     </ul>

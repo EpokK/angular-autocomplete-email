@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module('angular-autocomplete-email', [])
+.filter('autocompleteFilter', function() {
+    return function(emails, value) {
+        return emails;
+    };
+})
 .directive('autocompleteEmail', function ($timeout) {
 
     var regexEmail = /([.^\S]+@[.^\S]+\.[.^\S]+)/gi;
@@ -133,7 +138,7 @@ angular.module('angular-autocomplete-email', [])
                         edit: true
                     });
                 }
-                
+
                 scope.focusLastInput();
             };
 
@@ -170,6 +175,10 @@ angular.module('angular-autocomplete-email', [])
                         scope.getLastInput().focus();
                     }
                 }, 200);
+            };
+
+            scope.onChange = function(email) {
+                scope.newValue = email.newValue;
             };
 
             scope.onKeyDown = function(event, email) {
