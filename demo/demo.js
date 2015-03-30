@@ -9,11 +9,7 @@ app.controller('main', function($scope) {
         {value: 'Axelle <axelle@gmail.com>', label: 'Axelle'}
     ];
 
-    $scope.emails = [
+    $scope.emails1 = [
         {value: 'Richard <richard@gmail.com>', label: 'Richard'}
     ];
-
-    $scope.remove = function() {
-        $scope.emails.pop();
-    };
 });

@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-30T12:46:37.620Z
+ * Version: 0.0.8 - 2015-03-30T20:28:19.134Z
  * License: MIT
  */
 
@@ -135,7 +135,10 @@ angular.module('angular-autocomplete-email', [])
         restrict: 'EA',
         templateUrl: '../src/input.html',
         replace: true,
-        scope: false,
+        scope: {
+            emails: '=',
+            autocomplete: '='
+        },
         link: function (scope, element, attrs) {
             scope.params = {
                 newValue: '',

@@ -1,6 +1,6 @@
 <!doctype html>
 <html ng-app="demo">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>AngularJS directive demo</title>
 
@@ -11,22 +11,22 @@
 
     <link rel="stylesheet" href="../dist/directive.css">
     <link rel="stylesheet" href="demo.css">
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
 
+        <div class="row" ng-controller="main">
 
-      <div class="row" ng-controller="main">
+            <h4>Angular Autocomplete Email</h4>
 
-        <h4>Angular Autocomplete Email</h4>
+            <autocomplete-email emails="emails1" autocomplete="autocomplete"></autocomplete-email>
+            
+        </div>
 
-        <autocomplete-email emails="emails" autocomplete="autocomplete"></autocomplete-email>
-
-      </div>
     </div>
 
     <script src="../../src/score.js"></script>
     <script src="../dist/directive.js"></script>
     <script src="demo.js"></script>
-  </body>
+</body>
 </html>

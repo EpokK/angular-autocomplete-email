@@ -127,7 +127,10 @@ angular.module('angular-autocomplete-email', [])
         restrict: 'EA',
         templateUrl: '../src/input.html',
         replace: true,
-        scope: false,
+        scope: {
+            emails: '=',
+            autocomplete: '='
+        },
         link: function (scope, element, attrs) {
             scope.params = {
                 newValue: '',
