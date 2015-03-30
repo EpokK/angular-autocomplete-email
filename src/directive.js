@@ -72,8 +72,21 @@ angular.module('angular-autocomplete-email', [])
             .trim();
     };
 
+    var matchEmail = function(value) {
+        var emails = [];
+        var result = value.match(regexEmail);
+
+        if(result) {
+            emails = result;
+        } else {
+            emails = [];
+        }
+
+        return emails;
+    };
+
     var getEmails = function(value, emails, index) {
-        var values = value.match(regexEmail);
+        var values = matchEmail(value);
 
         emails = emails || [];
 
@@ -100,8 +113,6 @@ angular.module('angular-autocomplete-email', [])
                     tempValue = arrayValue[1];
                 }
             }
-        } else if(index) {
-            emails[index].newValue = '';
         }
 
         return emails;
@@ -118,37 +129,52 @@ angular.module('angular-autocomplete-email', [])
         replace: true,
         scope: false,
         link: function (scope, element, attrs) {
-            scope.autocompleteFiltered = [];
+            scope.params = {
+                newValue: '',
+                autocompleteFiltered: [],
+                selected: null
+            };
 
-            scope.onSubmit = function(email, focus) {
+            scope.onSubmit = function(email) {
+                console.log('onSubmit');
                 var index = scope.emails.indexOf(email);
-                var newValue = angular.copy(email.newValue);
+                var newValue = angular.copy(scope.params.newValue);
+                var length = scope.emails.length;
                 var emails = getEmails(newValue, scope.emails, index);
 
                 if(emails.length) {
                     scope.emails = emails;
                 } else {
+                    scope.params.newValue = '';
                     scope.onRemove(scope.emails.indexOf(email));
-                }
-
-                if(focus) {
-                    scope.createNewInput();
                 }
             };
 
             scope.selectFirstAutocomplete = function() {
-                // scope.auto
+
             };
 
             scope.onBlur = function(email) {
-                if(email.newValue.length) {
-                    scope.onSubmit(email, false);
+                console.log('onBlur');
+                var emails = matchEmail(scope.params.newValue);
+
+                if(emails.length > 0) {
+                    if(scope.params.selected !== null) {
+                        scope.onAddEmail(scope.params.autocompleteFiltered[scope.params.selected]);
+                        scope.onRemove(scope.emails.indexOf(email));
+                    } else {
+                        scope.onSubmit(email, false);
+                    }
+                } else {
+                    scope.onRemove(scope.emails.indexOf(email));
                 }
+
+                scope.createNewInput();
             };
 
             scope.onEdit = function(email) {
                 email.edit = true;
-                email.newValue = angular.copy(email.value);
+                scope.params.newValue = angular.copy(email.value);
             };
 
             scope.onRemove = function(index) {
@@ -160,18 +186,22 @@ angular.module('angular-autocomplete-email', [])
             };
 
             scope.createNewInput = function() {
-                var input = scope.getLastInput();
+                console.log('createNewInput');
+                $timeout(function() {
+                    var input = scope.getLastInput();
 
-                if(!angular.isDefined(input)) {
-                    scope.emails.push({
-                        value: '',
-                        label: '',
-                        newValue: '',
-                        edit: true
-                    });
-                }
+                    scope.params.newValue = '';
 
-                scope.focusLastInput();
+                    if(!angular.isDefined(input)) {
+                        scope.emails.push({
+                            value: '',
+                            label: '',
+                            edit: true
+                        });
+                    }
+
+                    scope.focusLastInput();
+                });
             };
 
             scope.onClick = function(event) {
@@ -186,6 +216,8 @@ angular.module('angular-autocomplete-email', [])
                     label: email.label,
                     edit: false
                 });
+                scope.params.newValue = '';
+                scope.onChange();
             };
 
             scope.onClose = function() {
@@ -209,21 +241,22 @@ angular.module('angular-autocomplete-email', [])
                 }, 200);
             };
 
-            scope.onChange = function(email) {
-                scope.newValue = email.newValue;
-                scope.autocompleteFiltered = $filter('autocompleteFilter')(scope.autocomplete, scope.newValue);
+            scope.onChange = function() {
+                scope.params.autocompleteFiltered = $filter('autocompleteFilter')(scope.autocomplete, scope.params.newValue);
             };
 
             scope.onKeyDown = function(event, email) {
                 switch (event.keyCode) {
                     case BACKSPACE_KEY:
-                        var value = email.newValue;
+                        var value = scope.params.newValue;
                         var emails = scope.emails;
 
                         if(value.length === 0 && emails.length > 0) {
                             this.onRemove(emails.length - 2);
                         }
                         break;
+                    case DOWN_KEY:
+                    case UP_KEY:
                     case TAB_KEY:
                     case ENTER_KEY:
                         event.preventDefault();
@@ -238,7 +271,32 @@ angular.module('angular-autocomplete-email', [])
                 switch (event.keyCode) {
                     case ENTER_KEY:
                     case TAB_KEY:
-                        scope.onSubmit(email, true);
+                        if(scope.params.selected !== null) {
+                            scope.onAddEmail(scope.params.autocompleteFiltered[scope.params.selected]);
+                            scope.onRemove(scope.emails.indexOf(email));
+                        } else {
+                            scope.onSubmit(email, true);
+                        }
+
+                        scope.createNewInput();
+                        break;
+                    case DOWN_KEY:
+                        if(scope.params.autocompleteFiltered.length > 0) {
+                            if(scope.params.selected === null) {
+                                 scope.params.selected = 0;
+                            } else if(scope.params.autocompleteFiltered.length > 0 && scope.params.selected < scope.params.autocompleteFiltered.length - 1) {
+                                  scope.params.selected++;
+                            }
+                        }
+                        break;
+                    case UP_KEY:
+                        if(scope.params.autocompleteFiltered.length > 0) {
+                            if(scope.params.selected > 1) {
+                                scope.params.selected--;
+                            } else {
+                                scope.params.selected = 0;
+                            }
+                        }
                         break;
                     default:
                         break;

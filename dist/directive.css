@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-28T15:55:52.252Z
+ * Version: 0.0.8 - 2015-03-30T12:38:55.906Z
  * License: MIT
  */
 
@@ -13,12 +13,9 @@
   cursor: text;
   background-color: #FFF;
   border: 1px solid #CCC;
-  min-height: 20px;
-  line-height: 20px;
+  min-height: 30px;
+  line-height: 30px;
   padding: 0 6px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   font-size: 13px;
   color: #555;
   -webkit-border-radius: 4px;
@@ -27,14 +24,20 @@
   vertical-align: middle;
   position: relative;
 }
+.email {
+  margin-right: 5px;
+}
 .label-email {
   background-color: #EEE;
   border: 1px solid #CCC;
   color: #333;
   cursor: pointer;
-  margin-top: 4px;
-  margin-right: 5px;
+  margin-top: 5px;
   text-shadow: none;
+  border-radius: 3px;
+  padding-left: 5px;
+  font-weight: bold;
+  font-size: 12px;
 }
 .label-email:hover {
   border-color: #AAA;
@@ -75,6 +78,10 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.autocomplete-email li {
+  padding: 0;
+  margin: 0;
 }
 .autocomplete-email a {
   line-height: 30px;

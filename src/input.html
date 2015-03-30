@@ -2,7 +2,7 @@
 
     <div class="input-email" ng-mousedown="onMouseDown($event)">
 
-        <span ng-repeat="email in emails">
+        <span ng-repeat="email in emails" class="email">
             <span
                 class="label-email"
                 ng-attr-title="{{email.value}}"
@@ -19,20 +19,24 @@
                 <input
                     class="edit-email"
                     type="text"
-                    ng-model="email.newValue"
+                    ng-model="params.newValue"
                     ng-blur="onBlur(email)"
                     ng-keydown="onKeyDown($event, email)"
                     ng-keyup="onKeyUp($event, email)"
-                    ng-change="onChange(email)" />
+                    ng-change="onChange()" />
             </form>
         </span>
 
     </div>
 
-    <ul class="autocomplete-email" ng-show="autocompleteFiltered.length">
-        <li ng-repeat="email in autocompleteFiltered">
-            <a href="" ng-click="onAddEmail(email)">{{email.value}}</a>
+    <ul class="autocomplete-email" ng-if="params.autocompleteFiltered.length">
+        <li ng-repeat="email in params.autocompleteFiltered">
+            <a href="" ng-mousedown="onAddEmail(email)" ng-class="{'selected': $index === params.selected}">{{email.value}}</a>
         </li>
     </ul>
 
+    <br />
+    <br />
+    {{emails|json}}<br />
+    {{params.newValue|json}}
 </div>
