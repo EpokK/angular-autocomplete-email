@@ -1,11 +1,14 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-27T20:38:55.348Z
+ * Version: 0.0.8 - 2015-03-28T15:55:52.252Z
  * License: MIT
  */
 
 
+.container-email {
+  position: relative;
+}
 .input-email {
   cursor: text;
   background-color: #FFF;

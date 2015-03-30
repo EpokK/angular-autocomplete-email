@@ -1,4 +1,4 @@
-<div>
+<div class="container-email">
 
     <div class="input-email" ng-mousedown="onMouseDown($event)">
 
@@ -14,7 +14,7 @@
 
             <form
                 class="form-email"
-                ng-submit="onSubmit(email)"
+                ng-submit="onSubmit(email, true)"
                 ng-if="!!email.edit">
                 <input
                     class="edit-email"
@@ -29,8 +29,8 @@
 
     </div>
 
-    <ul class="autocomplete-email">
-        <li ng-repeat="email in autocomplete | autocompleteFilter:newValue">
+    <ul class="autocomplete-email" ng-show="autocompleteFiltered.length">
+        <li ng-repeat="email in autocompleteFiltered">
             <a href="" ng-click="onAddEmail(email)">{{email.value}}</a>
         </li>
     </ul>

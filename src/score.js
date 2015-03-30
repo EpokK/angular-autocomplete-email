@@ -4,7 +4,7 @@ String.prototype.score = function(word, fuzziness) {
   if (this == word) return 1;
 
   //if it's not a perfect match and is empty return 0
-  if( word == "") return 0;
+  if( word === "") return 0;
 
   var runningScore = 0,
     charScore,
@@ -53,9 +53,9 @@ String.prototype.score = function(word, fuzziness) {
       startAt = idxOf + 1;
     }
   } else {
-    for (var i = 0; i < wordLength; ++i) {
+    for (var y = 0; y < wordLength; ++y) {
 
-      idxOf = lString.indexOf(lWord[i], startAt);
+      idxOf = lString.indexOf(lWord[y], startAt);
 
       if (-1 === idxOf) {
         return 0;
@@ -66,7 +66,7 @@ String.prototype.score = function(word, fuzziness) {
         if (string[idxOf - 1] === ' ') charScore += 0.8;
       }
 
-      if (string[idxOf] === word[i]) charScore += 0.1;
+      if (string[idxOf] === word[y]) charScore += 0.1;
 
       runningScore += charScore;
       startAt = idxOf + 1;
