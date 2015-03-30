@@ -221,7 +221,11 @@ angular.module('angular-autocomplete-email', [])
             };
 
             scope.onClose = function() {
+                scope.params.selected = null;
+            };
 
+            scope.onOpen = function() {
+                scope.params.selected = 0;
             };
 
             scope.getLastInput = function() {
@@ -243,6 +247,12 @@ angular.module('angular-autocomplete-email', [])
 
             scope.onChange = function() {
                 scope.params.autocompleteFiltered = $filter('autocompleteFilter')(scope.autocomplete, scope.params.newValue);
+
+                if(scope.params.autocompleteFiltered.length > 0) {
+                    scope.onOpen();
+                } else {
+                    scope.onClose();
+                }
             };
 
             scope.onKeyDown = function(event, email) {
