@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-30T20:28:19.134Z
+ * Version: 0.0.8 - 2015-03-30T20:37:42.733Z
  * License: MIT
  */
 
@@ -147,7 +147,6 @@ angular.module('angular-autocomplete-email', [])
             };
 
             scope.onSubmit = function(email) {
-                console.log('onSubmit');
                 var index = scope.emails.indexOf(email);
                 var newValue = angular.copy(scope.params.newValue);
                 var length = scope.emails.length;
@@ -166,7 +165,6 @@ angular.module('angular-autocomplete-email', [])
             };
 
             scope.onBlur = function(email) {
-                console.log('onBlur');
                 var emails = matchEmail(scope.params.newValue);
 
                 if(emails.length > 0) {
@@ -197,7 +195,6 @@ angular.module('angular-autocomplete-email', [])
             };
 
             scope.createNewInput = function() {
-                console.log('createNewInput');
                 $timeout(function() {
                     var input = scope.getLastInput();
 
