@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-30T20:43:50.254Z
+ * Version: 0.0.8 - 2015-03-30T20:49:30.588Z
  * License: MIT
  */
 
@@ -155,7 +155,6 @@ angular.module('angular-autocomplete-email', [])
                 if(emails.length) {
                     scope.emails = emails;
                 } else {
-                    scope.params.newValue = '';
                     scope.onRemove(scope.emails.indexOf(email));
                 }
             };
@@ -188,6 +187,8 @@ angular.module('angular-autocomplete-email', [])
 
             scope.onRemove = function(index) {
                 scope.emails.splice(index, 1);
+                scope.params.newValue = '';
+                scope.onChange();
             };
 
             scope.onMouseDown = function(event) {
@@ -199,6 +200,7 @@ angular.module('angular-autocomplete-email', [])
                     var input = scope.getLastInput();
 
                     scope.params.newValue = '';
+                    scope.onChange();
 
                     if(!angular.isDefined(input)) {
                         scope.emails.push({
