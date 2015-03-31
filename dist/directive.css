@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-30T14:43:45.905Z
+ * Version: 0.0.8 - 2015-03-31T07:08:00.471Z
  * License: MIT
  */
 
@@ -24,9 +24,6 @@
   vertical-align: middle;
   position: relative;
 }
-.email {
-  margin-right: 5px;
-}
 .label-email {
   background-color: #EEE;
   border: 1px solid #CCC;
@@ -38,9 +35,13 @@
   padding-left: 5px;
   font-weight: bold;
   font-size: 12px;
+  margin-right: 5px;
 }
 .label-email:hover {
   border-color: #AAA;
+}
+.label-email a {
+  margin-right: 5px;
 }
 .input-email input[type="text"] {
   border: none;

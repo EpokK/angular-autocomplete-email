@@ -16,11 +16,23 @@
     <div class="container">
 
         <div class="row" ng-controller="main">
+            <div class="col-md-2">
 
-            <h4>Angular Autocomplete Email</h4>
+                <button class="btn btn-default btn-block">New message</button>
 
-            <autocomplete-email emails="emails1" autocomplete="autocomplete"></autocomplete-email>
-            
+                <div class="folders"></div>
+
+            </div>
+
+            <div class="col-md-10">
+
+                <autocomplete-email emails="emails1" autocomplete="autocomplete"></autocomplete-email>
+
+                <div class="editor"></div>
+
+            </div>
+
+
         </div>
 
     </div>

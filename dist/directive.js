@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.8 - 2015-03-30T20:49:30.588Z
+ * Version: 0.0.8 - 2015-03-31T07:09:20.262Z
  * License: MIT
  */
 
@@ -159,10 +159,6 @@ angular.module('angular-autocomplete-email', [])
                 }
             };
 
-            scope.selectFirstAutocomplete = function() {
-
-            };
-
             scope.onBlur = function(email) {
                 var emails = matchEmail(scope.params.newValue);
 
@@ -176,8 +172,6 @@ angular.module('angular-autocomplete-email', [])
                 } else {
                     scope.onRemove(scope.emails.indexOf(email));
                 }
-
-                scope.createNewInput();
             };
 
             scope.onEdit = function(email) {
@@ -195,7 +189,7 @@ angular.module('angular-autocomplete-email', [])
                 scope.onClick(event);
             };
 
-            scope.createNewInput = function() {
+            scope.createNewInput = function(focus) {
                 $timeout(function() {
                     var input = scope.getLastInput();
 
@@ -327,4 +321,4 @@ angular.module('angular-autocomplete-email', [])
     };
 });
 
-angular.module("angular-autocomplete-email").run(["$templateCache", function($templateCache) {$templateCache.put("input.html","<div class=\"container-email\"><div class=\"input-email\" ng-mousedown=\"onMouseDown($event)\"><span ng-repeat=\"email in emails\" class=\"email\"><span class=\"label-email\" ng-attr-title=\"{{email.value}}\" ng-dblclick=\"onEdit(email)\" ng-if=\"!!!email.edit\"><span>{{email.label}}</span> <a ng-click=\"onRemove($index)\">x</a></span><form class=\"form-email\" ng-submit=\"onSubmit(email, true)\" ng-if=\"!!email.edit\"><input class=\"edit-email\" type=\"text\" ng-model=\"params.newValue\" ng-blur=\"onBlur(email)\" ng-keydown=\"onKeyDown($event, email)\" ng-keyup=\"onKeyUp($event, email)\" ng-change=\"onChange()\"></form></span></div><ul class=\"autocomplete-email\" ng-if=\"params.autocompleteFiltered.length\"><li ng-repeat=\"email in params.autocompleteFiltered\"><a href=\"\" ng-mousedown=\"onAddEmail(email)\" ng-class=\"{\'selected\': $index === params.selected}\">{{email.value}}</a></li></ul><br><br>{{emails|json}}<br>{{params.newValue|json}}</div>");}]);
+angular.module("angular-autocomplete-email").run(["$templateCache", function($templateCache) {$templateCache.put("input.html","<div class=\"container-email\"><div class=\"input-email\" ng-mousedown=\"onMouseDown($event)\"><span ng-repeat=\"email in emails\" class=\"email\"><span class=\"label-email\" ng-attr-title=\"{{email.value}}\" ng-dblclick=\"onEdit(email)\" ng-if=\"!!!email.edit\"><span>{{email.label}}</span> <a ng-click=\"onRemove($index)\">x</a></span><form class=\"form-email\" ng-submit=\"onSubmit(email, true)\" ng-if=\"!!email.edit\"><input class=\"edit-email\" type=\"text\" ng-model=\"params.newValue\" ng-blur=\"onBlur(email)\" ng-keydown=\"onKeyDown($event, email)\" ng-keyup=\"onKeyUp($event, email)\" ng-change=\"onChange()\"></form></span></div><ul class=\"autocomplete-email\" ng-if=\"params.autocompleteFiltered.length\"><li ng-repeat=\"email in params.autocompleteFiltered\"><a href=\"\" ng-mousedown=\"onAddEmail(email)\" ng-class=\"{\'selected\': $index === params.selected}\">{{email.value}}</a></li></ul></div>");}]);

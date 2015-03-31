@@ -1,0 +1,10 @@
+.row {
+    padding-top: 15px;
+}
+
+.editor, .folders {
+    border-radius: 5px;
+    margin-top: 15px;
+    background-color: #CCC;
+    height: 400px;
+}

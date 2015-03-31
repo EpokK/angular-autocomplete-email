@@ -151,10 +151,6 @@ angular.module('angular-autocomplete-email', [])
                 }
             };
 
-            scope.selectFirstAutocomplete = function() {
-
-            };
-
             scope.onBlur = function(email) {
                 var emails = matchEmail(scope.params.newValue);
 
@@ -168,8 +164,6 @@ angular.module('angular-autocomplete-email', [])
                 } else {
                     scope.onRemove(scope.emails.indexOf(email));
                 }
-
-                scope.createNewInput();
             };
 
             scope.onEdit = function(email) {
@@ -187,7 +181,7 @@ angular.module('angular-autocomplete-email', [])
                 scope.onClick(event);
             };
 
-            scope.createNewInput = function() {
+            scope.createNewInput = function(focus) {
                 $timeout(function() {
                     var input = scope.getLastInput();
 
